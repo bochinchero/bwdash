@@ -24,6 +24,7 @@ colorsMonthly = px.colors.sample_colorscale("deep_r", [n/(monthlyDataLen+1) for 
 
 
 app = Dash()
+app.title = "DCRDEX Trading Volumes"
 
 figDaily = px.bar(dailyData, x=dailyData.index, y=list(dailyData.columns.values), title="Daily Volume",
                             color_discrete_sequence=colorsDaily, height=500)
