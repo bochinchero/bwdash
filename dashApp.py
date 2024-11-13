@@ -66,6 +66,13 @@ def pieChart(data, colorScale):
                                                       for n in range(len(list(data.values)))])
     figure = px.pie(data, values=data.values, names=data.index, hole=.3,
                              color_discrete_sequence=colors)
+    figure.update_layout(legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=-0.2,
+        xanchor="center",
+        x=0.5
+    ))
     return figure
 
 # this function does the plotting, styling, etc.
@@ -100,7 +107,6 @@ def stackedBsars(data, fTitle, fHeight, yTitle, colorsScale):
         xaxis_title="Date",
         yaxis_title=yTitle,
         font=dict(family="Arial", size=12, color="#091440"),
-        showlegend=False,
         yaxis_tickprefix='$', yaxis_tickformat=',.0f'
     )
     figure.update_layout(
@@ -120,7 +126,15 @@ def stackedBsars(data, fTitle, fHeight, yTitle, colorsScale):
         linecolor='#596D81',
         gridcolor='#C4CBD2'
     )
-
+    figure.update_layout(legend=dict(
+        title=None,
+        bgcolor= 'rgba(255,255,255,0.5)',
+        orientation="h",
+        yanchor="top",
+        y=0.99,
+        xanchor="center",
+        x=0.5
+    ))
     return figure
 
 data = pd.read_csv('https://raw.githubusercontent.com/bochinchero/dcrsnapcsv/main/data/stream/dex_decred_org_VolUSD.csv')
@@ -258,7 +272,7 @@ app.layout = [
                 align="center", className="m-2"
             ),
         ],
-        fluid=True, style={"backgrond":"grey"}
+        fluid=True
     )
 ]
 
