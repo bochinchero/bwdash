@@ -67,6 +67,7 @@ def pieChart(data, colorScale):
     figure = px.pie(data, values=data.values, names=data.index, hole=.3,
                              color_discrete_sequence=colors)
     figure.update_layout(legend=dict(
+        bgcolor='rgba(255,255,255,0.7)',
         orientation="h",
         yanchor="bottom",
         y=-0.2,
@@ -128,7 +129,7 @@ def stackedBsars(data, fTitle, fHeight, yTitle, colorsScale):
     )
     figure.update_layout(legend=dict(
         title=None,
-        bgcolor= 'rgba(255,255,255,0.5)',
+        bgcolor= 'rgba(255,255,255,0.7)',
         orientation="h",
         yanchor="top",
         y=0.99,
@@ -228,6 +229,7 @@ app.layout = [
                             html.Div(dcc.Graph(figure=figCurMonth), )
                         ]
                     ), className=cardStyle),),
+                html.Div(className="w-100 d-md-none"),
                 dbc.Col(
                 dbc.Card(
                     dbc.CardBody(
