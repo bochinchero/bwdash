@@ -5,7 +5,7 @@ on:
     branches:
       - 'master'
   schedule:
-    - cron: '0 2 0 * *' # runs at 02:00 UTC every day
+    - cron: '0 2 * * *' # runs at 01:00 UTC every day
   workflow_dispatch:
 
 jobs:
