@@ -1,6 +1,13 @@
 name: Deploy app
 run-name: Deploy HTML pages generated from Dash app
-on: [push]
+on:
+  push:
+    branches:
+      - 'master'
+  schedule:
+    - cron: '0 2 00 * *' # runs at 02:00 UTC every day
+  workflow_dispatch:
+
 jobs:
 
   run_app:

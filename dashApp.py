@@ -165,13 +165,14 @@ figLastMonth = pieChart(lastMonthSplit, dcrColorScale)
 # building the dashboard at the top
 appDashValues = []
 dashValuesDict = [
-    {'title': f"24h vol. on {lastDaySplitTitle}", 'value':f'$ {format(sum(lastDaySplit), ",.0f")}'},
+    {'title': f"24h vol. on {lastDaySplitTitle}", 'value':f'$ {format(sum(lastDaySplit), ",.0f")}','div':''},
     {'title': f"Monthly vol. on {curMonthSplitTitle}", 'value':f'$ {format(sum(curMonthSplit), ",.0f")}'},
     {'title': f"Monthly vol. on {lastMonthSplitTitle}", 'value': f'$ {format(sum(lastMonthSplit), ",.0f")}'},
     {'title': f"Cumulative vol. last 90 days", 'value': f'$ {format(sum(last90dSplit), ",.0f")}'},
     {'title': f"Cumulative vol. last 6 months", 'value': f'$ {format(sum(last6mo), ",.0f")}'},
-    {'title': f"Cumulative vol. Last year", 'value': f'$ {format(sum(lastyear), ",.0f")}'},
-]
+    {'title': f"Cumulative vol. last year", 'value': f'$ {format(sum(lastyear), ",.0f")}'},]
+
+ix = 0
 for item in dashValuesDict:
     x = dbc.Col(dbc.Card(
         dbc.CardBody(
@@ -179,8 +180,13 @@ for item in dashValuesDict:
                 html.Div(item['title'], className='pb-1'),
                 html.H3(item['value'], className="card-title")
             ]),
-        ), className=cardStyle), className='h-100')
+        ), className=cardStyle), className='col my-2')
     appDashValues.append(x)
+    ix += 1
+    if ix % 2 == 0:
+        appDashValues.append(html.Div(className="w-100 d-xxl-none"))
+    appDashValues.append(html.Div(className="w-100 d-sm-none"))
+
 
 app.layout = [
     dbc.Container(
@@ -235,6 +241,18 @@ app.layout = [
                         [
                             html.H4("Daily Trading Volume", className="card-title"),
                             html.Div(dcc.Graph(figure=figDaily), )
+                        ]
+                    ), className=cardStyle),
+                align="center", className="m-2"
+            ),
+            dbc.Row(
+                dbc.Card(
+                    dbc.CardBody(
+                        [
+                            html.H4("About", className="card-title"),
+                            html.Div(['This dashboard is updated daily, with the 24 hour volume data collected via '
+                                     '',html.A("dcrsnapcsv", href='https://github.com/bochinchero/dcrsnapcsv'),' and converted'
+                                     ' to USD using the Coinmetrics daily reference price.'])
                         ]
                     ), className=cardStyle),
                 align="center", className="m-2"
