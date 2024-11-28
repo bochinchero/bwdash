@@ -168,7 +168,7 @@ last90dSplit = data[-90:].sum()
 last6mo = monthlyData[-6:].sum()
 lastyear = weeklyData[-52:].sum()
 
-app = Dash(debug=False,external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.title = "DCRDEX Trading Volumes"
 
 figDaily = stackedBsars(dailyData, None, 600, 'Daily Volume (USD)', dcrColorScale)
@@ -280,4 +280,4 @@ app.layout = [
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
